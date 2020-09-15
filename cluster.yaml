@@ -3,48 +3,43 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: shared-services-eks
-  region: eu-west-1
+  name: devops-tooling-eks
+  region: eu-west-2
   version: '1.17'  
 
+privateCluster:
+  enabled: true
+  additionalEndpointServices:
+  - "autoscaling"
+
 vpc:
-  id: "vpc-0b6187a14f11b4e69"  # (optional, must match VPC ID used for each subnet below)
-  cidr: "10.20.0.0/16"       # (optional, must match CIDR used by the given VPC)
+  nat:
+    gateway: HighlyAvailable
+  id: "vpc-02b7a77c59dfe02ee"  # (optional, must match VPC ID used for each subnet below)
+  cidr: "10.170.96.0/24"       # (optional, must match CIDR used by the given VPC)
   subnets:
     # must provide 'private' and/or 'public' subnets by availibility zone as shown
     private:
-      eu-west-1a:
-        id: "subnet-0b1e0849a42727ff1"
-        cidr: "10.20.1.0/24" # (optional, must match CIDR used by the given subnet)
+      eu-west-2a:
+        id: "infra-subprv-2a-devops"
+        cidr: "10.170.96.0/25" # (optional, must match CIDR used by the given subnet)
 
-      eu-west-1b:
-        id: "subnet-0a3b318d244552c2b"
-        cidr: "10.20.2.0/24"  # (optional, must match CIDR used by the given subnet)
-
-      eu-west-1c:
-        id: "subnet-0e2ac1592a954b79b"
-        cidr: "10.20.3.0/24"   # (optional, must match CIDR used by the given subnet)
-
-    public:
-      eu-west-1a:
-        id: "subnet-071aff54ebbf36f28"
-        cidr: "10.20.101.0/24" # (optional, must match CIDR used by the given subnet)
-
-      eu-west-1b:
-        id: "subnet-022b9fcb8991f03e6"
-        cidr: "10.20.102.0/24"  # (optional, must match CIDR used by the given subnet)
-
-      eu-west-1c:
-        id: "subnet-06ed6fccd78c2b890"
-        cidr: "10.20.103.0/24"   # (optional, must match CIDR used by the given subnet)           
+      eu-west-2b:
+        id: "infra-subprv-2b-devops"
+        cidr: "10.170.96.128/25"  # (optional, must match CIDR used by the given subnet)
+        
 
 nodeGroups:
-  - name: ng-1
+  - name: devops-tooling-node-group
     instanceType: m5.xlarge
-    desiredCapacity: 3
+    desiredCapacity: 4
     volumeSize: 100
     volumeType: gp2
     volumeEncrypted: true    
+    # privateNetworking must be explicitly set for a fully-private cluster
+    # Rather than defaulting this field to true for a fully-private cluster, we require users to explicitly set it
+    # to make the behaviour explicit and avoid confusion.
+    privateNetworking: true
 
 cloudWatch:
   clusterLogging:
@@ -55,11 +50,11 @@ cloudWatch:
 
 git:
   repo:
-    url: "git@github.com:polarpoint-io/fluxcd-shared-services"
+    url: "git@github.com:pol-onesource/devops-fluxcd-infra-tooling"
     branch: master
     fluxPath: "flux/"
-    user: "bainss"
-    email: "bainss@users.noreply.github.com"
+    user: "aws-dev-ops-github-service"
+    email: "aws-dev-ops-github-service@users.noreply.github.com"
   operator:
     namespace: "flux"
     withHelm: true
