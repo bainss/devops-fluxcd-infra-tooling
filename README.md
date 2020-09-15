@@ -17,15 +17,12 @@ eksctl create cluster  -f cluster.yaml
 Managed Helm releases
 
 - aws alb ingress
-- certificate manager
 - external secrets
 - argo-cd
-- aws-alb-ingress
 - harbor
 - jenkins-operator
 - prometheus-operator
 - metrics-server
-- cert-manager
 
 ## workloads for Kubernetes workloads
 
