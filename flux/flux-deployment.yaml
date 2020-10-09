@@ -142,14 +142,14 @@ spec:
         # Replace the following URL to change the Git repository used by Flux.
         # HTTP basic auth credentials can be supplied using environment variables:
         # https://$(GIT_AUTHUSER):$(GIT_AUTHKEY)@github.com/user/repository.git
-        - --git-url=git@github.com:polarpoint-io/fluxcd-shared-services
+        - --git-url=git@github.com:pol-onesource/devops-fluxcd-infra-tooling
         - --git-branch=master
         # Include this if you want to restrict the manifests considered by flux
         # to those under the following relative paths in the git repository
         # - --git-path=subdir1,subdir2
         - --git-label=flux
-        - --git-user=bainss
-        - --git-email=bainss@users.noreply.github.com
+        - --git-user=aws-dev-ops-github-service
+        - --git-email=aws-dev-ops-github-service@users.noreply.github.com
 
         # Include these two to enable git commit signing
         # - --git-gpg-key-import=/root/gpg-import
