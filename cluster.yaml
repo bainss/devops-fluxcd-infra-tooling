@@ -7,10 +7,6 @@ metadata:
   region: eu-west-2
   version: '1.17'  
 
-privateCluster:
-  enabled: true
-  additionalEndpointServices:
-  - "autoscaling"
 
 vpc:
   nat:
@@ -30,16 +26,49 @@ vpc:
         
 
 nodeGroups:
-  - name: devops-tooling-node-group
+  - name: devops-tooling-ng-on-demand-1
     instanceType: m5.xlarge
-    desiredCapacity: 4
+    desiredCapacity: 2
     volumeSize: 100
     volumeType: gp2
-    volumeEncrypted: true    
-    # privateNetworking must be explicitly set for a fully-private cluster
-    # Rather than defaulting this field to true for a fully-private cluster, we require users to explicitly set it
-    # to make the behaviour explicit and avoid confusion.
+    volumeEncrypted: true  
     privateNetworking: true
+    labels:
+      instance-type: on-demand
+    availabilityZones: ["eu-west-2a", "eu-west-2b"]  
+  - name: devops-tooling-ng-on-demand-2
+    instanceType: m5.xlarge
+    desiredCapacity: 2
+    volumeSize: 100
+    volumeType: gp2
+    volumeEncrypted: true  
+    privateNetworking: true
+    labels:
+      instance-type: on-demand
+    availabilityZones: ["eu-west-2a", "eu-west-2b"]  
+
+
+  # - name: devops-tooling-ng-spot-1
+  #   desiredCapacity: 1
+  #   minSize: 1
+  #   maxSize: 10
+  #   volumeType: gp2
+  #   volumeSize: 100
+  #   volumeEncrypted: true 
+  #   privateNetworking: true
+  #   instancesDistribution:
+  #     instanceTypes: ["m5.large", "m4.large", "t3.large", "m5d.large", "m5ad.large","t3a.large"]
+  #     onDemandBaseCapacity: 1
+  #     onDemandPercentageAboveBaseCapacity: 1
+  #     spotInstancePools: 6
+  #   tags:
+  #     k8s.io/cluster-autoscaler/node-template/label/instance-type: spot
+  #   availabilityZones: ["eu-west-2a", "eu-west-2b"]
+  #   labels:
+  #     instance-type: spot
+  #   iam:
+  #     withAddonPolicies:
+  #       autoScaler: true  
 
 cloudWatch:
   clusterLogging:
