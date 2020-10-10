@@ -7,7 +7,7 @@ metadata:
 data:
   1-clouds.yaml: |
     jenkins:
-      systemMessage: " Seville Software Factory Continuous Integration. </b></p>"
+      systemMessage: "Post Office Continuous Integration. </b></p>"
       numExecutors: 12
       location:
         url: ""
@@ -20,10 +20,10 @@ data:
                 scm:
                   github:
                     apiUri: "https://github.com/api/v3"
-                    credentialsId: "bainss-pat-github"
+                    credentialsId: "github-personal-access-token"
                     id: "https://github.com"
-                    repoOwner: "polarpoint-io"
-                    repository: "groovy-jenkins-shared-library"
+                    repoOwner: "pol-onesource"
+                    repository: "groovy-jenkins-shared-library"                    
       clouds:
       - kubernetes:
          containerCap: 10
