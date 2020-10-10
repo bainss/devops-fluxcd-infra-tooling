@@ -9,7 +9,7 @@ spec:
   chart:
     repository: https://raw.githubusercontent.com/jenkinsci/kubernetes-operator/master/chart/
     name: jenkins-operator
-    version: 0.3.4
+    version: 0.4.0
   values:
     # Jenkins Operator Helm chart
 
@@ -62,23 +62,7 @@ spec:
 
       # notifications is feature that notify user about Jenkins reconcilation status
       # See https://jenkinsci.github.io/kubernetes-operator/docs/getting-started/latest/notifications/ for more info
-      notifications:
-      - level: info
-        verbose: true
-        name: nslack
-        slack:
-          webHookURLSecretKeySelector:
-            secret:
-              name: jenkins-operator-notification-data
-            key: slack-webhook-url
-      - level: info
-        verbose: true
-        name: nteams
-        teams:
-          webHookURLSecretKeySelector:
-            secret:
-              name: jenkins-operator-notification-data
-            key: teams-webhook-url
+      notifications: []
       # basePlugins are plugins installed and required by the operator
       # Shouldn't contain plugins defined by user
       # You can change their versions here
