@@ -1,6 +1,6 @@
 # devops-fluxcd-infra-tooling
 
-This repo contains a set of helm and kubernetes resources to be deployed into our shared services cluster 
+This repo contains a set of helm and kubernetes resources to be deployed into our DevOps Tooling cluster 
 installed and configured by [eksctl](https://eksctl.io) through GitOps using the configuration file cluster.yaml and this respository.
 
 ```
