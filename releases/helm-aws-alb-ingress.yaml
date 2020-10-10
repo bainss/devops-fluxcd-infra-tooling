@@ -11,7 +11,7 @@ spec:
     name: aws-alb-ingress-controller
     version: 1.0.2
   values:
-    clusterName: shared-services-eks
+    clusterName: devops-tooling-eks
     ## Auto Discover awsRegion from ec2metadata, set this to true and omit awsRegion when ec2metadata is available.
     autoDiscoverAwsRegion: true
     ## Auto Discover awsVpcID from ec2metadata, set this to true and omit awsVpcID: " when ec2metadata is available.

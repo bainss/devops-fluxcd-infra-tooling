@@ -8,7 +8,7 @@ data:
       "logs": {
         "metrics_collected": {
           "kubernetes": {
-            "cluster_name": "shared-services-eks",
+            "cluster_name": "devops-tooling-eks",
             "metrics_collection_interval": 60
           }
         },
