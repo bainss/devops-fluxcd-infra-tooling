@@ -7,7 +7,7 @@ metadata:
 data:
   configuration-as-code.yaml: |
     jenkins:
-      systemMessage: "Post Office Continuous Integration. Please see https://github.com/po-ccoe/DO/jenkins-operator-jcasc for more details."
+      systemMessage: "Post Office Continuous Integration. Please see https://pol-jira.atlassian.net/wiki/spaces/DO/pages/14450801/Jenkins+with+the+Kubernetes+Operator for more details."
       numExecutors: 12
       clouds:
       - kubernetes:
