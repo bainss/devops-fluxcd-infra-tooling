@@ -53,19 +53,7 @@ spec:
       # enables configuration done directly via XML files
       enableXmlConfig: false
       # Allows to configure different SecurityRealm using Jenkins XML
-      securityRealm: |-
-        saml:
-          binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-          displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-          emailAttributeName: "email"
-          groupsAttributeName: "group"
-          idpMetadataConfiguration:
-            period: 0
-            xml: $SAML_CONFIG
-          logoutUrl: "https://pol-login.awsapps.com/start"
-          maximumAuthenticationLifetime: 86400
-          usernameAttributeName: "email"
-          usernameCaseConversion: "none"
+      #securityRealm: |-
       #  <securityRealm class="hudson.security.LegacySecurityRealm"/>
       # Allows to configure different AuthorizationStrategy using Jenkins XML
       authorizationStrategy: |-
@@ -535,7 +523,20 @@ spec:
         # Ignored if securityRealm is defined in master.JCasC.configScripts and
         # ignored if master.enableXmlConfig=true as master.securityRealm takes precedence
         securityRealm: |-
-          legacy
+          saml:
+            binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+            emailAttributeName: "email"
+            groupsAttributeName: "group"
+            idpMetadataConfiguration:
+              period: 0
+              xml: |-
+                $SAML_CONFIG
+            logoutUrl: "https://pol-login.awsapps.com/start"
+            maximumAuthenticationLifetime: 86400
+            usernameAttributeName: "email"
+            usernameCaseConversion: "none"
+          #legacy
         # Ignored if authorizationStrategy is defined in master.JCasC.configScripts and
         # ignored if master.enableXmlConfig=true as master.authorizationStrategy takes precedence
         authorizationStrategy: |-
