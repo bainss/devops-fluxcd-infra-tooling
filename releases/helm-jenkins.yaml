@@ -54,7 +54,19 @@ spec:
       enableXmlConfig: false
       # Allows to configure different SecurityRealm using Jenkins XML
       securityRealm: |-
-        <securityRealm class="hudson.security.LegacySecurityRealm"/>
+        saml:
+          binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+          displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+          emailAttributeName: "email"
+          groupsAttributeName: "group"
+          idpMetadataConfiguration:
+            period: 0
+            xml: $SAML_CONFIG
+          logoutUrl: "https://pol-login.awsapps.com/start"
+          maximumAuthenticationLifetime: 86400
+          usernameAttributeName: "email"
+          usernameCaseConversion: "none"
+      #  <securityRealm class="hudson.security.LegacySecurityRealm"/>
       # Allows to configure different AuthorizationStrategy using Jenkins XML
       authorizationStrategy: |-
         <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
@@ -97,7 +109,7 @@ spec:
       # Set min/max heap here if needed with:
       # javaOpts: "-Xms512m -Xmx512m"
       # jenkinsOpts: ""
-      # jenkinsUrl: ""
+      jenkinsUrl: "https://build.services.polcloud.org"
       # If you set this prefix and use ingress controller then you might want to set the ingress path below
       # jenkinsUriPrefix: "/jenkins"
       # Enable pod security context (must be `true` if runAsUser or fsGroup are set)
@@ -114,7 +126,7 @@ spec:
       targetPort: 8080
       # For minikube, set this to NodePort, elsewhere use LoadBalancer
       # Use ClusterIP if your setup includes ingress controller
-      serviceType: ClusterIP
+      serviceType: NodePort
       # Jenkins master service annotations
       serviceAnnotations: {}
       # Jenkins master custom labels
@@ -155,7 +167,7 @@ spec:
       # Note if you set this to 'LoadBalancer', you *must* define annotations to secure it. By default
       # this will be an external load balancer and allowing inbound 0.0.0.0/0, a HUGE
       # security risk:  https://github.com/kubernetes/charts/issues/1341
-      slaveListenerServiceType: "ClusterIP"
+      slaveListenerServiceType: "NodePort"
       # Optionally assign an IP to the LoadBalancer slaveListenerService LoadBalancer
       # GKE users: only regional static IPs will work for Service Load balancer.
       # slaveListenerLoadBalancerIP: 1.2.3.4
@@ -199,6 +211,7 @@ spec:
         - credentials-binding:1.23
         - git:4.2.2
         - configuration-as-code:1.43
+        - saml:1.1.7
 
       # List of plugins to install in addition to those listed in master.installPlugins
       additionalPlugins:
@@ -952,7 +965,12 @@ spec:
       # jenkinsgcp:
       ## Use this key for GCP credentials
         # gcpcredentials: credentials.json
-      env: []
+      env:
+      - name: SAML_CONFIG
+        valueFrom:
+          secretKeyRef:
+            name: saml-config
+            key: /service/sso/config
       # Example environment variable required for AWS credentials chain
       # - name: "AWS_REGION"
       #   value: "us-east-1"
