@@ -1,0 +1,11 @@
+---
+apiVersion: kubernetes-client.io/v1
+kind: ExternalSecret
+metadata:
+  name: saml-config
+  namespace: continuous-integration
+spec:
+  backendType: systemManager
+  data:
+    - key: /service/sso/config
+      name: password
