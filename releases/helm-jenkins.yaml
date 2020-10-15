@@ -53,8 +53,8 @@ spec:
       # enables configuration done directly via XML files
       enableXmlConfig: false
       # Allows to configure different SecurityRealm using Jenkins XML
-      securityRealm: |-
-        <securityRealm class="hudson.security.LegacySecurityRealm"/>
+      #securityRealm: |-
+        #<securityRealm class="hudson.security.LegacySecurityRealm"/>
       # Allows to configure different AuthorizationStrategy using Jenkins XML
       authorizationStrategy: |-
         <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
@@ -199,7 +199,7 @@ spec:
         - credentials-binding:1.23
         - git:4.2.2
         - configuration-as-code:1.43
-        - saml:1.1.7
+        - oic-auth:1.8
 
       # List of plugins to install in addition to those listed in master.installPlugins
       additionalPlugins:
@@ -522,8 +522,25 @@ spec:
         #      systemMessage: Welcome to our CI\CD server.  This Jenkins is configured and managed 'as code'.
         # Ignored if securityRealm is defined in master.JCasC.configScripts and
         # ignored if master.enableXmlConfig=true as master.securityRealm takes precedence
-        securityRealm: |-
-          legacy
+        securityRealm: |
+            oic:
+              authorizationServerUrl: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/oauth2/authorize"
+              clientId: "6c56k8ugbjt8mhs1arcblhkdtu"
+              clientSecret: "${CLIENT_SECRET}"
+              disableSslVerification: false
+              emailFieldName: "email"
+              endSessionEndpoint: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/logout?response_type=code&client_id=6c56k8ugbjt8mhs1arcblhkdtu&logout_uri=https://build.services.polcloud.org/logout&redirect_uri=https://pol-login.awsapps.com/start"
+              escapeHatchEnabled: true
+              escapeHatchSecret: "${ESCAPE_HATCH_SECRET}"
+              escapeHatchUsername: "breakglass"
+              fullNameFieldName: "name"
+              logoutFromOpenidProvider: true
+              postLogoutRedirectUrl: "https://pol-login.awsapps.com/start"
+              scopes: "openid email"
+              tokenServerUrl: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/oauth2/token"
+              userInfoServerUrl: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/oauth2/userInfo"
+              userNameField: "email"
+        #  legacy
         # Ignored if authorizationStrategy is defined in master.JCasC.configScripts and
         # ignored if master.enableXmlConfig=true as master.authorizationStrategy takes precedence
         authorizationStrategy: |-
@@ -954,10 +971,15 @@ spec:
       ## Use this key for GCP credentials
         # gcpcredentials: credentials.json
       env:
-      - name: SAML_CONFIG
+      - name: CLIENT_SECRET
         valueFrom:
           secretKeyRef:
-            name: saml-config
+            name: jenkins-clientsecret
+            key: password
+      - name: ESCAPE_HATCH_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: jenkins-escapehatchsecret
             key: password
       # Example environment variable required for AWS credentials chain
       # - name: "AWS_REGION"
