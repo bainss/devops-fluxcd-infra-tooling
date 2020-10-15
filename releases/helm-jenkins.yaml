@@ -61,8 +61,7 @@ spec:
           groupsAttributeName: "group"
           idpMetadataConfiguration:
             period: 0
-            xml: |-
-              $SAML_CONFIG
+            xml: $SAML_CONFIG
           logoutUrl: "https://pol-login.awsapps.com/start"
           maximumAuthenticationLifetime: 86400
           usernameAttributeName: "email"
