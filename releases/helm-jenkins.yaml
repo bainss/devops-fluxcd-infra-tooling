@@ -97,11 +97,6 @@ spec:
             secretKeyRef:
               name: jenkins-clientsecret
               key: password
-        - name: ESCAPE_HATCH_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: jenkins-escapehatchsecret
-              key: password
       #   - name: http_proxy
       #     value: "http://192.168.64.1:3128"
       # Set min/max heap here if needed with:
@@ -540,9 +535,7 @@ spec:
               disableSslVerification: false
               emailFieldName: "email"
               endSessionEndpoint: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/logout?response_type=code&client_id=6c56k8ugbjt8mhs1arcblhkdtu&logout_uri=https://build.services.polcloud.org/logout&redirect_uri=https://pol-login.awsapps.com/start"
-              escapeHatchEnabled: true
-              escapeHatchSecret: "${ESCAPE_HATCH_SECRET}"
-              escapeHatchUsername: "breakglass"
+              escapeHatchEnabled: false
               fullNameFieldName: "name"
               logoutFromOpenidProvider: true
               postLogoutRedirectUrl: "https://pol-login.awsapps.com/start"
