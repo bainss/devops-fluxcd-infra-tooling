@@ -40,17 +40,6 @@ spec:
       #      command:
       #      - "uname"
       #      - "-a"
-      env:
-      - name: CLIENT_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: jenkins-clientsecret
-            key: password
-      - name: ESCAPE_HATCH_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: jenkins-escapehatchsecret
-            key: password
       disableRememberMe: false
       numExecutors: 0
       # configures the executor mode of the Jenkins node. Possible values are: NORMAL or EXCLUSIVE
@@ -102,7 +91,17 @@ spec:
       # initContainerEnv:
       #   - name: http_proxy
       #     value: "http://192.168.64.1:3128"
-      # containerEnv:
+      containerEnv:
+        - name: CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jenkins-clientsecret
+              key: password
+        - name: ESCAPE_HATCH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jenkins-escapehatchsecret
+              key: password
       #   - name: http_proxy
       #     value: "http://192.168.64.1:3128"
       # Set min/max heap here if needed with:
