@@ -56,10 +56,10 @@ spec:
       #securityRealm: |-
       #  <securityRealm class="hudson.security.LegacySecurityRealm"/>
       # Allows to configure different AuthorizationStrategy using Jenkins XML
-      authorizationStrategy: |-
-        <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
-          <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
-        </authorizationStrategy>
+      #authorizationStrategy: |-
+      #  <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
+      #    <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
+      #  </authorizationStrategy>
       hostNetworking: false
       # When enabling LDAP or another non-Jenkins identity source, the built-in admin account will no longer exist.
       # If you disable the non-Jenkins identity store and instead use the Jenkins internal one,
