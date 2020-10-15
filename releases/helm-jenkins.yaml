@@ -40,6 +40,17 @@ spec:
       #      command:
       #      - "uname"
       #      - "-a"
+      env:
+      - name: CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: jenkins-clientsecret
+            key: password
+      - name: ESCAPE_HATCH_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: jenkins-escapehatchsecret
+            key: password
       disableRememberMe: false
       numExecutors: 0
       # configures the executor mode of the Jenkins node. Possible values are: NORMAL or EXCLUSIVE
@@ -970,17 +981,7 @@ spec:
       # jenkinsgcp:
       ## Use this key for GCP credentials
         # gcpcredentials: credentials.json
-      env:
-      - name: CLIENT_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: jenkins-clientsecret
-            key: password
-      - name: ESCAPE_HATCH_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: jenkins-escapehatchsecret
-            key: password
+      env: []
       # Example environment variable required for AWS credentials chain
       # - name: "AWS_REGION"
       #   value: "us-east-1"
