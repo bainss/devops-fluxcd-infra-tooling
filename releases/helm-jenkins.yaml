@@ -61,7 +61,8 @@ spec:
           groupsAttributeName: "group"
           idpMetadataConfiguration:
             period: 0
-            xml: $SAML_CONFIG
+            xml: |-
+              $SAML_CONFIG
           logoutUrl: "https://pol-login.awsapps.com/start"
           maximumAuthenticationLifetime: 86400
           usernameAttributeName: "email"
@@ -970,7 +971,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: saml-config
-            key: /service/sso/config
+            key: password
       # Example environment variable required for AWS credentials chain
       # - name: "AWS_REGION"
       #   value: "us-east-1"
