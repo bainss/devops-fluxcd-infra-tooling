@@ -523,40 +523,40 @@ spec:
         url: https://deploy.services.polcloud.org/
         # Argo CD instance label key
         application.instanceLabelKey: argocd.argoproj.io/instance
-          repositories: |
-            - name: pol-onesource
-              type: git
-              url: git@github.com:pol-onesource/hih-argocd-applications.git
-              sshPrivateKeySecret:
-                name: repo-324690479
-                key: sshPrivateKey
-            - name: iws
-              type: git
-              url: git@github.com:pol-onesource/iws-argocd-applications.git
-              sshPrivateKeySecret:
-                name: repo-3263018863
-                key: sshPrivateKey
+        repositories: |
+          - name: pol-onesource
+            type: git
+            url: git@github.com:pol-onesource/hih-argocd-applications.git
+            sshPrivateKeySecret:
+              name: repo-324690479
+              key: sshPrivateKey
+          - name: iws
+            type: git
+            url: git@github.com:pol-onesource/iws-argocd-applications.git
+            sshPrivateKeySecret:
+              name: repo-3263018863
+              key: sshPrivateKey
         #    - type: helm
         #      url: https://kubernetes-charts.storage.googleapis.com
         #      name: stable
         #    - type: helm
         #      url: https://argoproj.github.io/argo-helm
         #      name: argo
-          oidc.config: |
-            name: AWS-Cognito
-            issuer: https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_Hv7meUO6o
-            clientID: 5o2js68t4f8cas71st20p97f51
-            clientSecret: $oidc.client.clientSecret
-            requestedIDTokenClaims:
-              email:
-                essential: true
-              groups:
-                essential: true
-                value: cognito:groups
-            requestedScopes:
-              - openid
-              - email
-          users.anonymous.enabled: "false"
+        oidc.config: |
+          name: AWS-Cognito
+          issuer: https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_Hv7meUO6o
+          clientID: 5o2js68t4f8cas71st20p97f51
+          clientSecret: $oidc.client.clientSecret
+          requestedIDTokenClaims:
+            email:
+              essential: true
+            groups:
+              essential: true
+              value: cognito:groups
+          requestedScopes:
+            - openid
+            - email
+        users.anonymous.enabled: "false"
 
       ## Annotations to be added to ArgoCD ConfigMap
       configAnnotations: {}
