@@ -546,7 +546,7 @@ spec:
           name: AWS-Cognito
           issuer: https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_Hv7meUO6o
           clientID: 5o2js68t4f8cas71st20p97f51
-          clientSecret: $oidc.client.clientSecret
+          clientSecret: $oidc.client.secret
           requestedIDTokenClaims:
             email:
               essential: true
