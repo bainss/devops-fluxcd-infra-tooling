@@ -537,7 +537,7 @@ spec:
               endSessionEndpoint: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/logout?response_type=code&client_id=6c56k8ugbjt8mhs1arcblhkdtu&logout_uri=https://build.services.polcloud.org/logout&redirect_uri=https://pol-login.awsapps.com/start"
               escapeHatchEnabled: false
               fullNameFieldName: "name"
-              groupFieldName: "cognito:groups"
+              groupsFieldName: "cognito:groups"
               logoutFromOpenidProvider: true
               postLogoutRedirectUrl: "https://pol-login.awsapps.com/start"
               scopes: "openid email"
