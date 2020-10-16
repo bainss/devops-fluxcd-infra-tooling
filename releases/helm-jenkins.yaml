@@ -56,10 +56,10 @@ spec:
       #securityRealm: |-
         #<securityRealm class="hudson.security.LegacySecurityRealm"/>
       # Allows to configure different AuthorizationStrategy using Jenkins XML
-      authorizationStrategy: |-
-        <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
-          <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
-        </authorizationStrategy>
+      #authorizationStrategy: |-
+      #  <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
+      #    <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
+      #  </authorizationStrategy>
       hostNetworking: false
       # When enabling LDAP or another non-Jenkins identity source, the built-in admin account will no longer exist.
       # If you disable the non-Jenkins identity store and instead use the Jenkins internal one,
@@ -547,8 +547,30 @@ spec:
         # Ignored if authorizationStrategy is defined in master.JCasC.configScripts and
         # ignored if master.enableXmlConfig=true as master.authorizationStrategy takes precedence
         authorizationStrategy: |-
-          loggedInUsersCanDoAnything:
-            allowAnonymousRead: false
+            globalMatrix:
+              permissions:
+              - "Credentials/View:AWS-SSO-Jenkins-User"
+              - "Job/Build:AWS-SSO-Jenkins-User"
+              - "Job/Cancel:AWS-SSO-Jenkins-User"
+              - "Job/Configure:AWS-SSO-Jenkins-User"
+              - "Job/Create:AWS-SSO-Jenkins-User"
+              - "Job/Delete:AWS-SSO-Jenkins-User"
+              - "Job/Move:AWS-SSO-Jenkins-User"
+              - "Job/Read:AWS-SSO-Jenkins-User"
+              - "Job/Workspace:AWS-SSO-Jenkins-User"
+              - "Lockable Resources/View:AWS-SSO-Jenkins-User"
+              - "Overall/Administer:AWS-SSO-Admin-Users"
+              - "Overall/Read:authenticated"
+              - "Run/Delete:AWS-SSO-Jenkins-User"
+              - "Run/Replay:AWS-SSO-Jenkins-User"
+              - "Run/Update:AWS-SSO-Jenkins-User"
+              - "SCM/Tag:AWS-SSO-Jenkins-User"
+              - "View/Configure:AWS-SSO-Jenkins-User"
+              - "View/Create:AWS-SSO-Jenkins-User"
+              - "View/Delete:AWS-SSO-Jenkins-User"
+              - "View/Read:AWS-SSO-Jenkins-User"
+      #    loggedInUsersCanDoAnything:
+      #      allowAnonymousRead: false
       # Optionally specify additional init-containers
       customInitContainers: []
       # - name: custom-init
