@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "argocd-ingress"
+  namespace: "continuous-delivery"
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: deploy.services.polcloud.org
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/backend-protocol: HTTPS
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: 'subnet-099a6aca8c1945a64, subnet-098cdf9ee14d08734'
+    alb.ingress.kubernetes.io/security-groups: sg-0fa4ba671a2d714fc
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:700677256593:certificate/d72c24ed-40f2-428e-9115-559b743e2c1c
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/healthcheck-path: /login
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2017-01
+    alb.ingress.kubernetes.io/auth-type: cognito
+    alb.ingress.kubernetes.io/auth-scope: openid
+    alb.ingress.kubernetes.io/auth-session-timeout: '3600'
+    alb.ingress.kubernetes.io/auth-session-cookie: AWSELBAuthSessionCookie
+    alb.ingress.kubernetes.io/auth-on-unauthenticated-request: authenticate
+    alb.ingress.kubernetes.io/auth-idp-cognito: '{"UserPoolArn":"arn:aws:cognito-idp:eu-west-2:700677256593:userpool/eu-west-2_m3g5KpW3K", "UserPoolClientId":"4s0vgeasu3otn9ost6fnp7e2be", "UserPoolDomain":"dev-ops-tool-argocd"}'
+    alb.ingress.kubernetes.io/tags: Name=argocd-ALB,NAME=argocd-ALB-Test,owner=CloudOps,cost-centre=114773,environment=development,data-compliance=none
+  labels:
+    app: argocd-ingress
+spec:
+  rules:
+    - host: deploy.services.polcloud.org
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: "argo-cd-argocd-server-nodeport"
+              servicePort: 443
