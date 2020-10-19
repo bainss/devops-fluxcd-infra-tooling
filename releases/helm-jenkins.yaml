@@ -529,20 +529,20 @@ spec:
         # ignored if master.enableXmlConfig=true as master.securityRealm takes precedence
         securityRealm: |
             oic:
-              authorizationServerUrl: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/oauth2/authorize"
-              clientId: "6c56k8ugbjt8mhs1arcblhkdtu"
+              authorizationServerUrl: "https://dev-ops-tool-jenkins.auth.eu-west-2.amazoncognito.com/oauth2/authorize"
+              clientId: "vdhk4bd4ngr6ums1e7bcl9c9h"
               clientSecret: "${CLIENT_SECRET}"
               disableSslVerification: false
               emailFieldName: "email"
-              endSessionEndpoint: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/logout?response_type=code&client_id=6c56k8ugbjt8mhs1arcblhkdtu&logout_uri=https://build.services.polcloud.org/logout&redirect_uri=https://pol-login.awsapps.com/start"
+              endSessionEndpoint: "https://dev-ops-tool-jenkins.auth.eu-west-2.amazoncognito.com/logout?response_type=code&client_id=vdhk4bd4ngr6ums1e7bcl9c9h&logout_uri=https://build.services.polcloud.org/logout&redirect_uri=https://pol-login.awsapps.com/start"
               escapeHatchEnabled: false
               fullNameFieldName: "name"
               groupsFieldName: "cognito:groups"
               logoutFromOpenidProvider: true
               postLogoutRedirectUrl: "https://pol-login.awsapps.com/start"
               scopes: "openid email"
-              tokenServerUrl: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/oauth2/token"
-              userInfoServerUrl: "https://dev-ops-tool-domain.auth.eu-west-2.amazoncognito.com/oauth2/userInfo"
+              tokenServerUrl: "https://dev-ops-tool-jenkins.auth.eu-west-2.amazoncognito.com/oauth2/token"
+              userInfoServerUrl: "https://dev-ops-tool-jenkins.auth.eu-west-2.amazoncognito.com/oauth2/userInfo"
               userNameField: "email"
         #  legacy
         # Ignored if authorizationStrategy is defined in master.JCasC.configScripts and
