@@ -544,8 +544,8 @@ spec:
         #      name: argo
         oidc.config: |
           name: AWS-Cognito
-          issuer: https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_Hv7meUO6o
-          clientID: 5o2js68t4f8cas71st20p97f51
+          issuer: https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_m3g5KpW3K
+          clientID: 4s0vgeasu3otn9ost6fnp7e2be
           clientSecret: $oidc.client.secret
           requestedIDTokenClaims:
             email:
