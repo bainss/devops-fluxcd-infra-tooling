@@ -568,8 +568,8 @@ spec:
         policy.csv: |
           # Grant all members of 'AWS-SSO-Admin-Users' admins
           g, AWS-SSO-Admin-Users, role:admin
-        #  # Grant all members of 'AWS-SSO-ArgoCD-Users' readonly
-        #  g, AWS-SSO-ArgoCD-Users, role:readonly
+          # Grant all members of 'AWS-SSO-ArgoCD-Users' readonly
+          g, AWS-SSO-ArgoCD-Users, role:readonly
         #{}
         # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
         # Policy rules are in the form:
